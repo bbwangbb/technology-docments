@@ -1,0 +1,94 @@
+﻿# mysql 安装
+
+1.下载地址：https://dev.mysql.com/downloads/file/?id=476233
+2.解压zip包到安装目录
+3.配置环境变量
+
+MYSQL_HOME  安装目录
+Path ;%MYSQL_HOME%\bin;
+
+4.配置初始化的my.ini文件  [my.ini文件放在安装目录根目录下] 
+
+[mysqld]
+# 设置3306端口
+port=3306
+# 设置mysql的安装目录
+basedir=E:\\software\\mysql\\mysql-8.0.11-winx64   # 切记此处一定要用双斜杠\\，单斜杠我这里会出错，不过看别人的教程，有的是单斜杠。自己尝试吧
+# 设置mysql数据库的数据的存放目录
+datadir=E:\\software\\mysql\\mysql-8.0.11-winx64\\Data   # 此处同上
+# 允许最大连接数
+max_connections=200
+# 允许连接失败的次数。这是为了防止有人从该主机试图攻击数据库系统
+max_connect_errors=10
+# 服务端使用的字符集默认为UTF8
+character-set-server=utf8
+# 创建新表时将使用的默认存储引擎
+default-storage-engine=INNODB
+# 默认使用“mysql_native_password”插件认证
+default_authentication_plugin=mysql_native_password
+[mysql]
+# 设置mysql客户端默认字符集
+default-character-set=utf8
+[client]
+# 设置mysql客户端连接服务端时默认使用的端口
+port=3306
+default-character-set=utf8
+
+5.安装mysql [管理员身份运行cmd]
+在MySQL安装目录的 bin 目录下执行命令： mysqld --initialize --console
+
+**执行完成后，会打印 root 用户的初始默认密码**
+如下： [rI5rvf5x5G,E 为默认密码]
+C:\Program Files\MySQL\bin>mysqld --initialize --console
+2018-04-28T15:57:17.087519Z 0 [System] [MY-013169] [Server] C:\Program Files\MySQL\bin\mysqld.exe (mysqld 8.0.11) initializing of server in progress as process 4984
+2018-04-28T15:57:24.859249Z 5 [Note] [MY-010454] [Server] A temporary password is generated for root@localhost: rI5rvf5x5G,E
+2018-04-28T15:57:27.106660Z 0 [System] [MY-013170] [Server] C:\Program Files\MySQL\bin\mysqld.exe (mysqld 8.0.11) initializing of server has completed
+
+6.安装服务
+在MySQL安装目录的 bin 目录下执行命令：mysqld --install [服务名]
+后面的服务名可以不写，默认的名字为 mysql。
+
+通过命令net start mysql启动MySQL的服务
+通过命令net stop mysql停止服务
+通过命令sc delete MySQL/mysqld -remove卸载 MySQL 服务
+
+7.修改密码
+在MySQL安装目录的 bin 目录下执行命令：mysql -u root -p
+输入第5步 返回的初始默认密码
+
+在MySQL中执行命令：
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '新密码';  
+
+
+8.创建用户
+管理员root的host是localhost，代表仅限localhost登录访问。如果要允许开放其他ip登录，则需要添加新的host。如果要允许所有ip访问，可以直接修改成“%”
+
+CREATE USER 'xxh'@'%' IDENTIFIED WITH mysql_native_password BY 'xxh123!@#';
+
+CREATE USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'root';
+
+
+9.给用户添加指定数据库权限
+grant all privileges on 想授权的数据库.* to 'user1'@'%';
+
+
+*all 可以替换为 select,delete,update,create,drop
+
+10. 删除用户
+Delete FROM mysql.user Where User='user1';
+
+11.其他
+
+#(需要注意：mysql8.0加密方式修改了)
+#检查用户
+select user, host, plugin, authentication_string from user\G;
+
+授权远程数据库
+#授权所有权限 
+GRANT ALL PRIVILEGES ON *.* TO 'xxh'@'%'；
+#授权基本的查询修改权限，按需求设置
+GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER ON *.* TO 'xxh'@'%';
+
+查看用户权限
+show grants for 'xxh'@'%';
+

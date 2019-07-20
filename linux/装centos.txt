@@ -1,0 +1,21 @@
+0.下载需要版本的DVD1版本
+
+1.做U盘启动碟
+	http://www.onlinedown.net/soft/614.htm
+
+2.设置U盘为启动盘（按F12，这是技嘉主板的，其他的可能不一样，选择启动的东西）
+	直到到第三步出现蓝色屏幕为止
+	查：XX主板设置U盘启动
+	
+3.开始安装
+	https://www.osyunwei.com/archives/2307.html
+	如果报ACPI的错误，在回车安装之前按TAB，空格acpi=off，就可以继续安装了
+
+4.记得设置密码，忘记设置密码就下面
+	https://www.cnblogs.com/007sx/p/6028525.html
+
+5.固定ip，要不然就查一下（下面可能不准确）
+	https://blog.csdn.net/chunxiaqiudong5/article/details/79521667
+
+6.service network restart报错
+	https://blog.csdn.net/qq_20480611/article/details/46793427
