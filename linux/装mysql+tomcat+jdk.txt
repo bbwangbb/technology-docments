@@ -1,0 +1,8 @@
+mysql
+	https://downloads.mysql.com/archives/community/
+
+jdk
+	https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+
+tomcat
+	https://archive.apache.org/dist/tomcat/tomcat-8/v8.0.33/bin/
