@@ -1,6 +1,6 @@
 ﻿# mysql 安装
 
-1.下载地址：https://dev.mysql.com/downloads/file/?id=476233
+1.下载地址：https://dev.mysql.com/downloads/mysql/
 2.解压zip包到安装目录
 3.配置环境变量
 
