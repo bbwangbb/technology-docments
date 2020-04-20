@@ -1,0 +1,46 @@
+1、确定技术选型（项目架构：从数据库到前台）
+
+2、搭建项目
+	
+	修改pom：根据技术选型引入，并管理相关版本
+	
+	配置yml：添加数据库等yml配置
+
+	包结构
+		module（不同模块有各自的mvc三层，这样转为分布式时就可以根据模块分）
+			dao/mapper
+			service/service.impl
+			controller
+		common
+			util
+			config
+			exceptionHandler
+			interceptor
+			entity
+	
+	将通用的config/exceptionHandler/interceptor/分页参数类/响应结果类/工具类等配置
+	
+	接口文档：swagger也要配好
+	
+3、编码规范：
+	方法注释
+	类注释
+	各种变量的命名规则
+	数据库相关命名规则（下面是示例）
+		库名：公司名_项目名
+		表名/存储过程名：tb/p_module_entity
+		字段名：wordA_wordB
+	
+3、设计数据库表（只要生成实体类，都可以为之添加swagger备注）
+	将表转换为entity，并为所有eneity写好swagger的备注
+	生成entity的dao/mapper/service/impl/controller
+4、确定前台显示数据（和3一起）
+5、确定前台功能（和3一起）
+
+6、根据功能写接口（
+	确定下功能后，写Controller接口（并为接口设置swagger注解：类上/方法上/参数上）
+	若需要返回数据，则可以先返回假数据，便于前台测试
+）
+7、接口文档（
+	用的swaggerui，就要每个实体每个controller都要配置完整，才会看到提示信息，便于前端
+）
